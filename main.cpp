@@ -17,7 +17,6 @@ void SetDistance(int **D,int r,int c,int value,const int row,const int col){
 }
 
 void TurnBack(int **M,int **D,int &Crow,int &Ccol,int &Lrow,int &Lcol){
-    //int r=Crow, c=Ccol;
     if(Crow==Lrow && (Ccol+1)==Lcol && M[Crow+1][Ccol]!=INT32_MAX && M[Crow][Ccol-1]==INT32_MAX && M[Crow-1][Ccol]==INT32_MAX){
         Lrow=Crow;
         Lcol=Ccol;
@@ -132,10 +131,9 @@ void TurnBack(int **M,int **D,int &Crow,int &Ccol,int &Lrow,int &Lcol){
     }
 
     }
-
-    //if(r==Lrow && c==Lcol)
-    //    TurnBack(M,D,Crow,Ccol,Lrow,Lcol);
 }
+
+
 
 int main(){
     ifstream fin;
@@ -287,26 +285,6 @@ int main(){
                 Crow--;
             }
             else if(M[Crow][Ccol+1]!=0 && M[Crow+1][Ccol]!=0 && M[Crow][Ccol-1]!=0 && M[Crow-1][Ccol]!=0){
-                /*if(M[Crow][Ccol+1]<=M[Crow+1][Ccol] && M[Crow][Ccol+1]<=M[Crow][Ccol-1] && M[Crow][Ccol+1]<=M[Crow-1][Ccol]){
-                    if(D[Crow][Ccol+1]==D[Crow][Ccol]-1)
-                        M[Crow][Ccol+1]--;
-                    Ccol++;
-                }
-                else if(M[Crow+1][Ccol]<M[Crow][Ccol+1] && M[Crow+1][Ccol]<=M[Crow][Ccol-1] && M[Crow+1][Ccol]<=M[Crow-1][Ccol]){
-                    if(D[Crow+1][Ccol]==D[Crow][Ccol]-1)
-                        M[Crow+1][Ccol]--;
-                    Crow++;
-                }
-                else if(M[Crow][Ccol-1]<M[Crow][Ccol+1] && M[Crow][Ccol-1]<M[Crow+1][Ccol] && M[Crow][Ccol-1]<=M[Crow-1][Ccol]){
-                    if(D[Crow][Ccol-1]==D[Crow][Ccol]-1)
-                        M[Crow][Ccol-1]--;
-                    Ccol--;
-                }
-                else if(M[Crow-1][Ccol]<M[Crow][Ccol+1] && M[Crow-1][Ccol]<M[Crow+1][Ccol] && M[Crow-1][Ccol]<M[Crow][Ccol-1]){
-                    if(D[Crow-1][Ccol]==D[Crow][Ccol]-1)
-                        M[Crow-1][Ccol]--;
-                    Crow--;
-                }*/
                 TurnBack(M,D,Crow,Ccol,Lrow,Lcol);
                 numzeros++;
             }
@@ -342,7 +320,9 @@ int main(){
         numzeros--;
         M[Crow][Ccol]++;
         fout << Crow << " " << Ccol << endl;
-        if(steps==battery)steps=0;
+        if(steps==battery){
+            steps=0;
+        }
     }
     fout.close();
     fout.open("final.path");
@@ -356,10 +336,10 @@ int main(){
     fin.close();
     
     //FOR TESTING MATRIX
-    for(int r=0;r<row;r++){
+    /*for(int r=0;r<row;r++){
         fout << endl;
         for(int c=0;c<col;c++)
-            fout << M[r][c] << " ";}
+            fout << M[r][c] << " ";}*/
     
     fout.close();
 

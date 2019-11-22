@@ -16,6 +16,127 @@ void SetDistance(int **D,int r,int c,int value,const int row,const int col){
     }
 }
 
+void TurnBack(int **M,int **D,int &Crow,int &Ccol,int &Lrow,int &Lcol){
+    //int r=Crow, c=Ccol;
+    if(Crow==Lrow && (Ccol+1)==Lcol && M[Crow+1][Ccol]!=INT32_MAX && M[Crow][Ccol-1]==INT32_MAX && M[Crow-1][Ccol]==INT32_MAX){
+        Lrow=Crow;
+        Lcol=Ccol;
+        if(D[Crow+1][Ccol]==D[Crow][Ccol]-1)
+            M[Crow+1][Ccol]--;
+        Crow++;
+    }
+    else if(Crow==Lrow && (Ccol+1)==Lcol && M[Crow+1][Ccol]==INT32_MAX && M[Crow][Ccol-1]!=INT32_MAX && M[Crow-1][Ccol]==INT32_MAX){
+        Lrow=Crow;
+        Lcol=Ccol;
+        if(D[Crow][Ccol-1]==D[Crow][Ccol]-1)
+            M[Crow][Ccol-1]--;
+        Ccol--;
+    }
+    else if(Crow==Lrow && (Ccol+1)==Lcol && M[Crow+1][Ccol]==INT32_MAX && M[Crow][Ccol-1]==INT32_MAX && M[Crow-1][Ccol]!=INT32_MAX){
+        Lrow=Crow;
+        Lcol=Ccol;
+        if(D[Crow-1][Ccol]==D[Crow][Ccol]-1)
+            M[Crow-1][Ccol]--;
+        Crow--;
+    }
+    
+        else if((Crow+1)==Lrow && Ccol==Lcol && M[Crow][Ccol+1]!=INT32_MAX && M[Crow][Ccol-1]==INT32_MAX && M[Crow-1][Ccol]==INT32_MAX){
+            Lrow=Crow;
+            Lcol=Ccol;
+            if(D[Crow][Ccol+1]==D[Crow][Ccol]-1)
+                M[Crow][Ccol+1]--;
+            Ccol++;
+        }
+        else if((Crow+1)==Lrow && Ccol==Lcol && M[Crow][Ccol+1]==INT32_MAX && M[Crow][Ccol-1]!=INT32_MAX && M[Crow-1][Ccol]==INT32_MAX){
+            Lrow=Crow;
+            Lcol=Ccol;
+            if(D[Crow][Ccol-1]==D[Crow][Ccol]-1)
+                M[Crow][Ccol-1]--;
+            Ccol--;
+        }
+        else if((Crow+1)==Lrow && Ccol==Lcol && M[Crow][Ccol+1]==INT32_MAX && M[Crow][Ccol-1]==INT32_MAX && M[Crow-1][Ccol]!=INT32_MAX){
+            Lrow=Crow;
+            Lcol=Ccol;
+            if(D[Crow-1][Ccol]==D[Crow][Ccol]-1)
+                M[Crow-1][Ccol]--;
+            Crow--;
+        }
+    
+        else if(Crow==Lrow && (Ccol-1)==Lcol && M[Crow][Ccol+1]!=INT32_MAX && M[Crow+1][Ccol]==INT32_MAX && M[Crow-1][Ccol]==INT32_MAX){
+            Lrow=Crow;
+            Lcol=Ccol;
+            if(D[Crow][Ccol+1]==D[Crow][Ccol]-1)
+                M[Crow][Ccol+1]--;
+            Ccol++;
+        }
+        else if(Crow==Lrow && (Ccol-1)==Lcol && M[Crow][Ccol+1]==INT32_MAX && M[Crow+1][Ccol]!=INT32_MAX && M[Crow-1][Ccol]==INT32_MAX){
+            Lrow=Crow;
+            Lcol=Ccol;
+            if(D[Crow+1][Ccol]==D[Crow][Ccol]-1)
+                M[Crow+1][Ccol]--;
+            Crow++;
+        }
+        else if(Crow==Lrow && (Ccol-1)==Lcol && M[Crow][Ccol+1]==INT32_MAX && M[Crow+1][Ccol]==INT32_MAX && M[Crow-1][Ccol]!=INT32_MAX){
+            Lrow=Crow;
+            Lcol=Ccol;
+            if(D[Crow-1][Ccol]==D[Crow][Ccol]-1)
+                M[Crow-1][Ccol]--;
+            Crow--;
+        }
+    
+        else if((Crow-1)==Lrow && Ccol==Lcol && M[Crow][Ccol+1]!=INT32_MAX && M[Crow+1][Ccol]==INT32_MAX && M[Crow][Ccol-1]==INT32_MAX){
+            Lrow=Crow;
+            Lcol=Ccol;
+            if(D[Crow][Ccol+1]==D[Crow][Ccol]-1)
+                M[Crow][Ccol+1]--;
+            Ccol++;
+        }
+        else if((Crow-1)==Lrow && Ccol==Lcol && M[Crow][Ccol+1]==INT32_MAX && M[Crow+1][Ccol]!=INT32_MAX && M[Crow][Ccol-1]==INT32_MAX){
+            Lrow=Crow;
+            Lcol=Ccol;
+            if(D[Crow+1][Ccol]==D[Crow][Ccol]-1)
+                M[Crow+1][Ccol]--;
+            Crow++;
+        }
+        else if((Crow-1)==Lrow && Ccol==Lcol && M[Crow][Ccol+1]==INT32_MAX && M[Crow+1][Ccol]==INT32_MAX && M[Crow][Ccol-1]!=INT32_MAX){
+            Lrow=Crow;
+            Lcol=Ccol;
+            if(D[Crow][Ccol-1]==D[Crow][Ccol]-1)
+                M[Crow][Ccol-1]--;
+            Ccol--;
+        }
+    
+    else{
+    Lrow=Crow;
+    Lcol=Ccol;
+    
+    if(M[Crow][Ccol+1]<=M[Crow+1][Ccol] && M[Crow][Ccol+1]<=M[Crow][Ccol-1] && M[Crow][Ccol+1]<=M[Crow-1][Ccol]){
+        if(D[Crow][Ccol+1]==D[Crow][Ccol]-1)
+            M[Crow][Ccol+1]--;
+        Ccol++;
+    }
+    else if(M[Crow+1][Ccol]<M[Crow][Ccol+1] && M[Crow+1][Ccol]<=M[Crow][Ccol-1] && M[Crow+1][Ccol]<=M[Crow-1][Ccol]){
+        if(D[Crow+1][Ccol]==D[Crow][Ccol]-1)
+            M[Crow+1][Ccol]--;
+        Crow++;
+    }
+    else if(M[Crow][Ccol-1]<M[Crow][Ccol+1] && M[Crow][Ccol-1]<M[Crow+1][Ccol] && M[Crow][Ccol-1]<=M[Crow-1][Ccol]){
+        if(D[Crow][Ccol-1]==D[Crow][Ccol]-1)
+            M[Crow][Ccol-1]--;
+        Ccol--;
+    }
+    else if(M[Crow-1][Ccol]<M[Crow][Ccol+1] && M[Crow-1][Ccol]<M[Crow+1][Ccol] && M[Crow-1][Ccol]<M[Crow][Ccol-1]){
+        if(D[Crow-1][Ccol]==D[Crow][Ccol]-1)
+            M[Crow-1][Ccol]--;
+        Crow--;
+    }
+
+    }
+
+    //if(r==Lrow && c==Lcol)
+    //    TurnBack(M,D,Crow,Ccol,Lrow,Lcol);
+}
+
 int main(){
     ifstream fin;
     ofstream fout;
@@ -80,11 +201,14 @@ int main(){
     int totalsteps=0;
     int Crow=Rrow;
     int Ccol=Rcol;
+    int Lrow, Lcol; //Last position
     fout.open("temporary.path");
     fout << Crow << " " << Ccol << endl;
     while(numzeros>0 || Crow!=Rrow || Ccol!=Rcol){
         //Go home when the battery is about to be used up.
         if(D[Crow][Ccol]==battery-steps || numzeros==0){
+            Lrow=Crow;
+            Lcol=Ccol;
             if(D[Crow][Ccol+1]==D[Crow][Ccol]-1 && D[Crow+1][Ccol]!=D[Crow][Ccol]-1 && D[Crow][Ccol-1]!=D[Crow][Ccol]-1 && D[Crow-1][Ccol]!=D[Crow][Ccol]-1)Ccol++;
             else if(D[Crow][Ccol+1]!=D[Crow][Ccol]-1 && D[Crow+1][Ccol]==D[Crow][Ccol]-1 && D[Crow][Ccol-1]!=D[Crow][Ccol]-1 && D[Crow-1][Ccol]!=D[Crow][Ccol]-1)Crow++;
             else if(D[Crow][Ccol+1]!=D[Crow][Ccol]-1 && D[Crow+1][Ccol]!=D[Crow][Ccol]-1 && D[Crow][Ccol-1]==D[Crow][Ccol]-1 && D[Crow-1][Ccol]!=D[Crow][Ccol]-1)Ccol--;
@@ -142,33 +266,73 @@ int main(){
 
         //On the road.
         else if(Crow!=0 && Crow!=row-1 && Ccol!=0 && Ccol!=col-1){
-            if(M[Crow][Ccol+1]==0)Ccol++;
-            else if(M[Crow+1][Ccol]==0 && M[Crow][Ccol+1]!=0)Crow++;
-            else if(M[Crow][Ccol-1]==0 && M[Crow][Ccol+1]!=0 && M[Crow+1][Ccol]!=0)Ccol--;
-            else if(M[Crow-1][Ccol]==0 && M[Crow][Ccol+1]!=0 && M[Crow+1][Ccol]!=0 && M[Crow][Ccol-1]!=0)Crow--;
+            if(M[Crow][Ccol+1]==0){
+                Lrow=Crow;
+                Lcol=Ccol;
+                Ccol++;
+            }
+            else if(M[Crow+1][Ccol]==0 && M[Crow][Ccol+1]!=0){
+                Lrow=Crow;
+                Lcol=Ccol;
+                Crow++;
+            }
+            else if(M[Crow][Ccol-1]==0 && M[Crow][Ccol+1]!=0 && M[Crow+1][Ccol]!=0){
+                Lrow=Crow;
+                Lcol=Ccol;
+                Ccol--;
+            }
+            else if(M[Crow-1][Ccol]==0 && M[Crow][Ccol+1]!=0 && M[Crow+1][Ccol]!=0 && M[Crow][Ccol-1]!=0){
+                Lrow=Crow;
+                Lcol=Ccol;
+                Crow--;
+            }
             else if(M[Crow][Ccol+1]!=0 && M[Crow+1][Ccol]!=0 && M[Crow][Ccol-1]!=0 && M[Crow-1][Ccol]!=0){
-                if(M[Crow][Ccol+1]<=M[Crow+1][Ccol] && M[Crow][Ccol+1]<=M[Crow][Ccol-1] && M[Crow][Ccol+1]<=M[Crow-1][Ccol])Ccol++;
-                else if(M[Crow+1][Ccol]<M[Crow][Ccol+1] && M[Crow+1][Ccol]<=M[Crow][Ccol-1] && M[Crow+1][Ccol]<=M[Crow-1][Ccol])Crow++;
-                else if(M[Crow][Ccol-1]<M[Crow][Ccol+1] && M[Crow][Ccol-1]<M[Crow+1][Ccol] && M[Crow][Ccol-1]<=M[Crow-1][Ccol])Ccol--;
-                else if(M[Crow-1][Ccol]<M[Crow][Ccol+1] && M[Crow-1][Ccol]<M[Crow+1][Ccol] && M[Crow-1][Ccol]<M[Crow][Ccol-1])Crow--;
-                
+                /*if(M[Crow][Ccol+1]<=M[Crow+1][Ccol] && M[Crow][Ccol+1]<=M[Crow][Ccol-1] && M[Crow][Ccol+1]<=M[Crow-1][Ccol]){
+                    if(D[Crow][Ccol+1]==D[Crow][Ccol]-1)
+                        M[Crow][Ccol+1]--;
+                    Ccol++;
+                }
+                else if(M[Crow+1][Ccol]<M[Crow][Ccol+1] && M[Crow+1][Ccol]<=M[Crow][Ccol-1] && M[Crow+1][Ccol]<=M[Crow-1][Ccol]){
+                    if(D[Crow+1][Ccol]==D[Crow][Ccol]-1)
+                        M[Crow+1][Ccol]--;
+                    Crow++;
+                }
+                else if(M[Crow][Ccol-1]<M[Crow][Ccol+1] && M[Crow][Ccol-1]<M[Crow+1][Ccol] && M[Crow][Ccol-1]<=M[Crow-1][Ccol]){
+                    if(D[Crow][Ccol-1]==D[Crow][Ccol]-1)
+                        M[Crow][Ccol-1]--;
+                    Ccol--;
+                }
+                else if(M[Crow-1][Ccol]<M[Crow][Ccol+1] && M[Crow-1][Ccol]<M[Crow+1][Ccol] && M[Crow-1][Ccol]<M[Crow][Ccol-1]){
+                    if(D[Crow-1][Ccol]==D[Crow][Ccol]-1)
+                        M[Crow-1][Ccol]--;
+                    Crow--;
+                }*/
+                TurnBack(M,D,Crow,Ccol,Lrow,Lcol);
                 numzeros++;
             }
         }
 
         else if(Crow==0){
+            Lrow=Crow;
+            Lcol=Ccol;
             if(M[Crow+1][Ccol]==0)Crow++;
             else{Crow++;numzeros++;}
         }
         else if(Crow==row-1){
+            Lrow=Crow;
+            Lcol=Ccol;
             if(M[Crow-1][Ccol]==0)Crow--;
             else{Crow--;numzeros++;}
         }
         else if(Ccol==0){
+            Lrow=Crow;
+            Lcol=Ccol;
             if(M[Crow][Ccol+1]==0)Ccol++;
             else{Ccol++;numzeros++;}
         }
         else if(Ccol==col-1){
+            Lrow=Crow;
+            Lcol=Ccol;
             if(M[Crow][Ccol-1]==0)Ccol--;
             else{Ccol--;numzeros++;}
         }
@@ -190,13 +354,14 @@ int main(){
         fout << line;
     }
     fin.close();
-    fout.close();
-
+    
     //FOR TESTING MATRIX
-    /*for(int r=0;r<row;r++){
+    for(int r=0;r<row;r++){
         fout << endl;
         for(int c=0;c<col;c++)
-            fout << M[r][c] << " ";}*/
+            fout << M[r][c] << " ";}
+    
+    fout.close();
 
     return 0;
 }
